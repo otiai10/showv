@@ -10,5 +10,9 @@ var Spec;
             console.log('うぃっす');
             ok();
         });
+        it('[test of test] can fail', function () {
+            var f = false;
+            f.should.equal(true);
+        });
     });
 })(Spec || (Spec = {}));
