@@ -1,4 +1,3 @@
-/// <reference path="../definitions/underscore.d.ts" />
 /// <reference path="../definitions/jquery.d.ts" />
 
 module showv {
@@ -36,9 +35,6 @@ module showv {
 
         delegateEvents(events?: Object): View {
             this.events = events || {};
-            _.map({}, (eventFunction, eventNameAndSelector) => {
-                console.log(this);
-            });
             $.map(this.events, (eventFunction, eventNameAndSelector) => {
                 console.log(this);
             });

@@ -7,16 +7,20 @@ module Spec {
     chai.should();
 
     describe('View', () => {
-        it('should be HOGE!!', (ok) => {
-            console.log(mocha);
-            console.log(chai);
-            console.log(ok);
-            console.log('うぃっす');
-            ok();
+        var mockView: ShowvMockView;
+
+        beforeEach(() => {
+            mockView = new ShowvMockView();
         });
-        it('[test of test] can fail', () => {
-            var f = false;
-            f.should.equal(true);
+        it('should be HOGE!!', () => {
+            console.log(mockView);
         });
     });
+
+    // This is just a mock!
+    class ShowvMockView extends showv.View {
+        constructor() {
+            super();
+        }
+    }
 }
