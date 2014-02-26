@@ -26,13 +26,20 @@ module.exports = (grunt) ->
             showv:
                 src: ['src/**/*.ts']
                 dest: 'compiled/showv.ts'
+        clean:
+            all:
+                src: [
+                    'compiled/**/*'
+                    'build/**/*'
+                ]
 
     grunt.loadNpmTasks 'grunt-typescript'
     grunt.loadNpmTasks 'grunt-contrib-concat'
+    grunt.loadNpmTasks 'grunt-contrib-clean'
 
     grunt.registerTask 'compile', ['typescript:compile']
     grunt.registerTask 'squash',  ['concat:showv']
     grunt.registerTask 'build',   ['squash','compile']
-    grunt.registerTask 'test',    ['build', 'typescript:test']
+    grunt.registerTask 'test',    ['clean:all', 'build', 'typescript:test']
 
     grunt.registerTask 'default', ['build']

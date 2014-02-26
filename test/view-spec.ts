@@ -1,19 +1,22 @@
 /// <reference path="../src/view.ts" />
 /// <reference path="../definitions/mocha.d.ts" />
 /// <reference path="../definitions/chai.d.ts" />
+/// <reference path="../definitions/jquery.d.ts" />
 
 module Spec {
 
     chai.should();
 
     describe('View', () => {
-        var mockView: ShowvMockView;
-
-        beforeEach(() => {
-            mockView = new ShowvMockView();
-        });
-        it('should be HOGE!!', () => {
-            console.log(mockView);
+        describe('on create default', () => {
+            var mockView: ShowvMockView;
+            beforeEach(() => {
+                mockView = new ShowvMockView();
+            });
+            it('should have $el', () => {
+                mockView.$el.should.be.instanceof(jQuery);
+                mockView.$el[0].tagName.should.equal('DIV');
+            });
         });
     });
 

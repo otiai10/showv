@@ -19,18 +19,24 @@ module showv {
         delegate: boolean = true;
 
         events:    Object = {};
+        $el:       JQuery;
 
         constructor(options: IViewCreateOptions = {}) {
             this.ensureOptions(options);
+            this.ensureElemens();
             this.delegateEvents();
-            console.log(this);
         }
 
-        private ensureOptions(options: IViewCreateOptions) {
+        private ensureOptions(options: IViewCreateOptions): View {
             this.tagName   = options.tagName || 'div';
             this.className = options.className || '';
             this.id        = options.id || '';
             this.delegate  = (options.delegate == null) ? true : options.delegate;
+            return this;
+        }
+        private ensureElemens(): View {
+            this.$el = $('<' + this.tagName + '>');   
+            return this;
         }
 
         delegateEvents(events?: Object): View {

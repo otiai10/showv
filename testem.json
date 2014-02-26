@@ -6,7 +6,7 @@
         "test/**/*.ts"
     ],
     "serve_files" : [
-        "bower_components/jquery/dist/jquery.js",
+        "bower_components/jquery/jquery.js",
         "build/showv.js",
         "compiled/test/**/*.js"
     ]
