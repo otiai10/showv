@@ -15,7 +15,9 @@ module.exports = (grunt) ->
             # test/のtsファイルをそれぞれ別に
             # compiled/**/*.jsファイルにする
             test:
-                src: ['test/**/*.ts']
+                src: [
+                    'test/**/*.ts'
+                ]
                 dest: 'compiled'
                 options:
                     module: 'commonjs'
@@ -31,4 +33,6 @@ module.exports = (grunt) ->
     grunt.registerTask 'compile', ['typescript:compile']
     grunt.registerTask 'squash',  ['concat:showv']
     grunt.registerTask 'build',   ['squash','compile']
+    grunt.registerTask 'test',    ['build', 'typescript:test']
 
+    grunt.registerTask 'default', ['build']

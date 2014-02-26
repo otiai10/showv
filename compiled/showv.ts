@@ -1,4 +1,7 @@
-module Showv {
+/// <reference path="../definitions/underscore.d.ts" />
+/// <reference path="../definitions/jquery.d.ts" />
+
+module showv {
     export interface IViewCreateOptions {
         tagName?:   string;
         className?: string;
@@ -33,10 +36,12 @@ module Showv {
 
         delegateEvents(events?: Object): View {
             this.events = events || {};
-            /*
-            _.map(this.events, (eventFunction, eventNameAndSelector) => {
+            _.map({}, (eventFunction, eventNameAndSelector) => {
+                console.log(this);
             });
-            */
+            $.map(this.events, (eventFunction, eventNameAndSelector) => {
+                console.log(this);
+            });
             return this;
         }
         /*
@@ -44,5 +49,9 @@ module Showv {
 
         }
         */
+
+        render(): View {
+            return this;
+        }
     }
 }
