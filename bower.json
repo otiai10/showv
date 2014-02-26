@@ -1,0 +1,13 @@
+{
+    "name": "showv",
+    "version": "0.0.1",
+    "devDependencies": {
+        "jquery": "*",
+        "underscore": "*"
+    },
+    "ignore": [
+        "Gruntfile.coffee",
+        ".gitignore",
+        "package.json"
+    ]
+}
