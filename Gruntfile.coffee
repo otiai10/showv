@@ -27,5 +27,8 @@ module.exports = (grunt) ->
 
     grunt.loadNpmTasks 'grunt-typescript'
     grunt.loadNpmTasks 'grunt-contrib-concat'
-    grunt.registerTask 'default', ['typescript:compile']
-    grunt.registerTask 'squash', ['concat:showv']
+
+    grunt.registerTask 'compile', ['typescript:compile']
+    grunt.registerTask 'squash',  ['concat:showv']
+    grunt.registerTask 'build',   ['squash','compile']
+
