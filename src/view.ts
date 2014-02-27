@@ -6,10 +6,12 @@ module showv {
         className?: string;
         id?:        string;
         delegate?:  boolean;
+        $el?:       JQuery;
     }
     export interface IEventSelectorPair {
-        eventName: string;
-        selector?: string;
+        rawKey:   string;
+        evName:   string;
+        selector: string;
     }
     export class View {
 
@@ -18,7 +20,6 @@ module showv {
         id:        string = '';
         delegate: boolean = true;
 
-        events:    Object = {};
         $el:       JQuery;
 
         constructor(options: IViewCreateOptions = {}) {
@@ -32,25 +33,42 @@ module showv {
             this.className = options.className || '';
             this.id        = options.id || '';
             this.delegate  = (options.delegate == null) ? true : options.delegate;
+            this.$el       = options.$el || null;
             return this;
         }
         private ensureElemens(): View {
-            this.$el = $('<' + this.tagName + '>');   
-            return this;
-        }
-
-        delegateEvents(events?: Object): View {
-            this.events = events || {};
-            $.map(this.events, (eventFunction, eventNameAndSelector) => {
-                console.log(this);
+            this.$el = this.$el || $('<' + this.tagName + '>').attr({
+                id:    this.id,
+                class: this.className
             });
             return this;
         }
-        /*
-        private splitEventAndSelector(eventNameAndSelector: string): IEventSelectorPair {
 
+        // should be override
+        events(): Object { return {}; }
+
+        delegateEvents(): View {
+            var _events = this.events();
+            $.map(_events, (eventFunctionName, eventNameAndSelector) => {
+                var pair = this.splitEventAndSelector(eventNameAndSelector);
+                var fn = (function(_this){
+                    return function(){
+                        _this[_events[pair.rawKey]].apply(_this);
+                    }
+                })(this);
+                this.$el.on.call(this.$el, pair.evName, pair.selector, fn);
+            });
+            return this;
         }
-        */
+        // TODO: Exception handling
+        private splitEventAndSelector(eventNameAndSelector: string): IEventSelectorPair {
+            var splits = eventNameAndSelector.split(' ');
+            return {
+                rawKey: eventNameAndSelector,
+                evName: splits[0],
+                selector: splits[1]
+            };
+        }
 
         render(): View {
             return this;

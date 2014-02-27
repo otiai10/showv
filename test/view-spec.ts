@@ -8,22 +8,121 @@ module Spec {
     chai.should();
 
     describe('View', () => {
-        describe('on create default', () => {
+        describe('when created without options', () => {
             var mockView: ShowvMockView;
             beforeEach(() => {
                 mockView = new ShowvMockView();
             });
             it('should have $el', () => {
                 mockView.$el.should.be.instanceof(jQuery);
+            });
+            it('tag name should be "div"', () => {
                 mockView.$el[0].tagName.should.equal('DIV');
             });
+            it('should not have `id`', () => {
+                mockView.$el[0].id.should.equal('');
+            });
+            it('should not have `class`', () => {
+                mockView.$el[0].className.should.equal('');
+            });
+            it('should not have any contents', () => {
+                mockView.$el.html().should.equal('');
+            });
         });
+
+        describe('when created with some options', () => {
+            describe('options with tagName or so', () => {
+                var mockView: ShowvMockView;
+                beforeEach(() => {
+                    var options = {
+                        tagName:   'li',
+                        id:        'showv-test-000',
+                        className: 'tweet'
+                    };
+                    mockView = new ShowvMockView(options);
+                });
+                it('should have $el', () => {
+                    mockView.$el.should.be.instanceof(jQuery);
+                });
+                it('tag name should be "div"', () => {
+                    mockView.$el[0].tagName.should.equal('LI');
+                });
+                it('should not have `id`', () => {
+                    mockView.$el[0].id.should.equal('showv-test-000');
+                });
+                it('should not have `class`', () => {
+                    mockView.$el[0].className.should.equal('tweet');
+                });
+            });
+            describe('options with $el', () => {
+                var mockView: ShowvMockView;
+                beforeEach(() => {
+                    var _$el = $('<blockquote id="test-bq"></blockquote>');
+                    var options = {
+                        $el: _$el
+                    };
+                    mockView = new ShowvMockView(options);
+                });
+                it('should have $el', () => {
+                    mockView.$el.should.be.instanceof(jQuery);
+                });
+                it('tag name should be "div"', () => {
+                    mockView.$el[0].tagName.should.equal('BLOCKQUOTE');
+                });
+                it('should not have `id`', () => {
+                    mockView.$el[0].id.should.equal('test-bq');
+                });
+            });
+        });
+
+        describe('when `events` method defiend', () => {
+            var mockView: ShowvMockView;
+            beforeEach(() => {
+                mockView = new ShowvMockView();
+                mockView.$el.append(
+                    $('<a></a>').attr({'id':'trigger-A'}),
+                    $('<a></a>').attr({'id':'trigger-B'})
+                );
+            });
+            it('should delegate evetns', () => {
+                // initially
+                mockView.flagA.should.be.false;
+                mockView.flagB.should.be.false;
+                // after A
+                mockView.$el.find('a#trigger-A').click();
+                mockView.flagA.should.be.true;
+                mockView.flagB.should.be.false;
+                // after B
+                mockView.$el.find('a#trigger-B').click();
+                mockView.flagA.should.be.false;
+                mockView.flagB.should.be.true;
+            });
+        });
+
     });
 
     // This is just a mock!
     class ShowvMockView extends showv.View {
-        constructor() {
-            super();
+        flagA: boolean;
+        flagB: boolean;
+        constructor(options: showv.IViewCreateOptions = {}) {
+            super(options);
+            this.flagA = false;
+            this.flagB = false;
+        }
+        events(): Object {
+            return {
+                'click a#trigger-A': 'methodA',
+                'click a#trigger-B': 'methodB'
+            }
+        }
+        methodA() {
+            this.flagA = true;
+            this.flagB = false;
+        }
+        methodB() {
+            this.flagA = false;
+            this.flagB = true;
         }
     }
 }
