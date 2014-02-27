@@ -9,7 +9,7 @@ No more than a simple view class by TypeScript.
 /// <reference path="your/path/to/showv.d.ts" />
 
 class MyAppView extends showv.View {
-    constructor(private user: TwitterUser/*more any model*/) {
+    constructor(private user: TwitterUser/* or any your model */) {
         super({
             tagName: 'li',
             class: 'tweets',
