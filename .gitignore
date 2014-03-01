@@ -2,7 +2,6 @@ node_modules
 bower_components
 build
 compiled
-sample/*.js
 *.log
 .idea
 *.iml
