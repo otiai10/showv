@@ -2,23 +2,26 @@ module.exports = (grunt) ->
     grunt.initConfig
         pkg: grunt.file.readJSON 'package.json'
         typescript:
-            # "typescript:compile"タスク
-            # compiled/showv.tsファイルをjsにビルドする
             compile:
                 src: ['compiled/showv.ts']
                 dest: 'build/showv.js'
                 options:
                     module: 'commonjs'
                     target: 'es3'
-                    declaration: true # 同時にshowv.d.tsもつくる
-            # "typescript:test"タスク
-            # test/のtsファイルをそれぞれ別に
-            # compiled/**/*.jsファイルにする
+                    declaration: true
             test:
                 src: [
                     'test/**/*.ts'
                 ]
                 dest: 'compiled'
+                options:
+                    module: 'commonjs'
+                    target: 'es3'
+            sample:
+                src: [
+                    'sample/src/**/*.ts'
+                ]
+                dest: 'sample/sample.js'
                 options:
                     module: 'commonjs'
                     target: 'es3'
@@ -41,5 +44,6 @@ module.exports = (grunt) ->
     grunt.registerTask 'squash',  ['concat:showv']
     grunt.registerTask 'build',   ['squash','compile']
     grunt.registerTask 'test',    ['clean:all', 'build', 'typescript:test']
+    grunt.registerTask 'sample',  ['clean:all', 'build', 'typescript:sample']
 
     grunt.registerTask 'default', ['build']
