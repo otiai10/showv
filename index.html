@@ -19,23 +19,13 @@
     <script type="text/javascript" src="sample/sample.js"></script>
     <script>
         $(function(){
-            var mainView = new Sample.MainView();
+            var wrapper = new Sample.WrapperView();
             $('body').append(
-                    mainView.render().$el
+                wrapper.render().$el
             );
         });
     </script>
 </head>
 <body>
-<pre class="prettyprint">
-/// &lt;reference path="your/path/to/showv.d.ts" /&gt;
-module YourApp {
-    export class YourView extends showv.View {
-        constructor(){
-            super();
-        }
-    }
-}
-</pre>
 </body>
 </html>
