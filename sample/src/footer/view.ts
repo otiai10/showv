@@ -7,7 +7,7 @@ module Sample {
         }
         render(): FooterView {
             this.$el.append(
-                '<h2>This is Footer</h2>'
+                '<h4>This software is released under the MIT License.</h4>'
             );
             return this;
         }

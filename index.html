@@ -20,22 +20,13 @@
     <script type="text/javascript" src="sample/sample.js"></script>
     <script>
         $(function(){
-            var wrapper = new Sample.WrapperView();
+            setTimeout(prettyPrint, 0);
             $('body').append(
-                wrapper.render().$el
+                new Sample.WrapperView().render().$el
             );
         });
     </script>
 </head>
 <body>
-    <pre class="prettyprint">
-        module Hoge {
-            export class Fuga {
-                constructor() {
-                    window.alert('hoge');
-                }
-            }
-        }
-    </pre>
 </body>
 </html>

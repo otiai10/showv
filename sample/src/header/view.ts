@@ -7,8 +7,7 @@ module Sample {
         }
         render(): HeaderView {
             this.$el.append(
-                '<h1>Showv</h1>',
-                '<h2>The Simplest View Framework for TypeScript.</h2>'
+                '<h1>Showv <span>The Simplest View Framework for TypeScript</span></h1>'
             );
             return this;
         }

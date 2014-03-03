@@ -12,7 +12,7 @@ var Sample;
             _super.call(this);
         }
         FooterView.prototype.render = function () {
-            this.$el.append('<h2>This is Footer</h2>');
+            this.$el.append('<h4>This software is released under the MIT License.</h4>');
             return this;
         };
         return FooterView;
@@ -27,7 +27,7 @@ var Sample;
             _super.call(this);
         }
         HeaderView.prototype.render = function () {
-            this.$el.append('<h1>Showv</h1>', '<h2>The Simplest View Framework for TypeScript.</h2>');
+            this.$el.append('<h1>Showv <span>The Simplest View Framework for TypeScript</span></h1>');
             return this;
         };
         return HeaderView;
@@ -36,13 +36,71 @@ var Sample;
 })(Sample || (Sample = {}));
 var Sample;
 (function (Sample) {
+    var SourcecodeView = (function (_super) {
+        __extends(SourcecodeView, _super);
+        function SourcecodeView(title, source) {
+            _super.call(this);
+            this.titlePart = new TitlePart(title);
+            this.sourcePart = new SourcePart(source);
+        }
+        SourcecodeView.prototype.render = function () {
+            this.$el.append(this.titlePart.render().$el, this.sourcePart.render().$el);
+            return this;
+        };
+        return SourcecodeView;
+    })(showv.View);
+    Sample.SourcecodeView = SourcecodeView;
+    var SourcePart = (function (_super) {
+        __extends(SourcePart, _super);
+        function SourcePart(sourcecode) {
+            _super.call(this, {
+                tagName: 'pre',
+                className: 'prettyprint'
+            });
+            this.sourcecode = sourcecode;
+            this.$el.append(this.sourcecode);
+            return this;
+        }
+        return SourcePart;
+    })(showv.View);
+    var TitlePart = (function (_super) {
+        __extends(TitlePart, _super);
+        function TitlePart(title) {
+            _super.call(this, {
+                tagName: 'h2',
+                className: 'code-title'
+            });
+            this.title = title;
+            this.$el.append(this.title);
+            return this;
+        }
+        return TitlePart;
+    })(showv.View);
+})(Sample || (Sample = {}));
+var Sample;
+(function (Sample) {
+    var UsageView = (function (_super) {
+        __extends(UsageView, _super);
+        function UsageView() {
+            _super.call(this, "Usage", "/// &lt;reference path=\"your/path/to/showv.d.ts\" /&gt;\n" + "module YourApp {\n" + "  export class YourView extends showv.View {\n" + "      constructor() {\n" + "          super();\n" + "      }\n" + "  }\n" + "}");
+        }
+        UsageView.prototype.render = function () {
+            return _super.prototype.render.call(this);
+        };
+        return UsageView;
+    })(Sample.SourcecodeView);
+    Sample.UsageView = UsageView;
+})(Sample || (Sample = {}));
+var Sample;
+(function (Sample) {
     var MainView = (function (_super) {
         __extends(MainView, _super);
         function MainView() {
             _super.call(this);
+            this.usage = new Sample.UsageView();
         }
         MainView.prototype.render = function () {
-            this.$el.append('<div>This is main</div>');
+            this.$el.append(this.usage.render().$el);
             return this;
         };
         return MainView;
