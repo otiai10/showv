@@ -32,12 +32,16 @@ module Sample {
     class TitlePart extends showv.View {
         constructor(private title: string){
             super({
-                tagName: 'h2',
-                className: 'code-title'
+                tagName: 'a',
+                id: title,
+                className: 'code-title linky'
             });
             this.$el.append(
-                this.title
+                $('<h2>').text(this.title)
             );
+            this.$el.attr({
+                href: '#' + title
+            });
             return this;
         }
     }

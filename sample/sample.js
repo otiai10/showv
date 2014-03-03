@@ -67,11 +67,15 @@ var Sample;
         __extends(TitlePart, _super);
         function TitlePart(title) {
             _super.call(this, {
-                tagName: 'h2',
-                className: 'code-title'
+                tagName: 'a',
+                id: title,
+                className: 'code-title linky'
             });
             this.title = title;
-            this.$el.append(this.title);
+            this.$el.append($('<h2>').text(this.title));
+            this.$el.attr({
+                href: '#' + title
+            });
             return this;
         }
         return TitlePart;

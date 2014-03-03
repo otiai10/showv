@@ -1,25 +1,27 @@
 /**
  * main css for showv sample
  */
-html {
-    /*
-    background-size: cover;
-    background-attachment:             fixed;
-    background-repeat:             no-repeat;
-    background-position:         left bottom;
-    background-image: url('../../showv.jpg');
-    */
+.linky, .linky:visited, .linky:focus {
+    color:           #000;
+    outline:         none;
+    position:    relative;
+    text-decoration: none;
 }
-body {
+.linky:hover {
+    color: #aaa;
 }
+.linky:hover:before {
+    content: "∽";
+    position: absolute;
+    top:    0;
+    left: -20px;
+}
+
 #wrapper {
     width:       80%;
     min-width: 680px;
     margin:   0 auto;
     padding:    20px;
-    /*
-    background-color: rgba(255,255,255,0.9);
-    */
 }
 h1 {
     margin:   30px 0;
