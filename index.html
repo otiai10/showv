@@ -8,7 +8,8 @@
     <link rel="shortcut icon" href="sample/showv.png">
     <link rel="stylesheet" href="sample/css/reset.css">
     <link rel="stylesheet" href="sample/css/showv.css">
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <link rel="stylesheet" href="sample/lib/prettify.css">
+    <script src="sample/lib/prettify.js"></script>
     <!-- /design -->
 
     <!-- dependency -->
@@ -27,5 +28,14 @@
     </script>
 </head>
 <body>
+    <pre class="prettyprint">
+        module Hoge {
+            export class Fuga {
+                constructor() {
+                    window.alert('hoge');
+                }
+            }
+        }
+    </pre>
 </body>
 </html>
