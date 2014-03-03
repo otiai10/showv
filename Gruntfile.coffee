@@ -36,12 +36,12 @@ module.exports = (grunt) ->
                     'build/**/*'
                 ]
         regarde:
-            src:
-                files: [
-                    'src/**/*.ts'
-                    'sample/src/**/*.ts'
-                ]
-                tasks: ['sample']
+            default:
+                files: ['src/**/*.ts']
+                tasks: ['build']
+            sample:
+                files: ['sample/src/**/*.ts']
+                tasks: ['typescript:sample']
  
 
     grunt.loadNpmTasks 'grunt-typescript'
@@ -53,7 +53,7 @@ module.exports = (grunt) ->
     grunt.registerTask 'squash',  ['concat:showv']
     grunt.registerTask 'build',   ['squash','compile']
     grunt.registerTask 'test',    ['clean:all', 'build', 'typescript:test']
-    grunt.registerTask 'sample',  ['clean:all', 'build', 'typescript:sample']
-    grunt.registerTask 'watch',   ['sample', 'regarde']
+    grunt.registerTask 'sample',  ['typescript:sample', 'regarde:sample']
+    grunt.registerTask 'watch',   ['build', 'regarde:default']
 
     grunt.registerTask 'default', ['build']
