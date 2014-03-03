@@ -21,7 +21,7 @@ module Sample {
         constructor(private sourcecode: string){
             super({
                 tagName: 'pre',
-                className: 'prettyprint'
+                className: 'sourcecode prettyprint'
             });
             this.$el.append(
                 this.sourcecode

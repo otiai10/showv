@@ -8,12 +8,10 @@ module Sample {
                 "Usage",
                 // use template engine, please
                 "/// &lt;reference path=\"your/path/to/showv.d.ts\" /&gt;\n"
-                +"module YourApp {\n"
-                +"  export class YourView extends showv.View {\n"
-                +"      constructor() {\n"
-                +"          super();\n"
-                +"      }\n"
-                +"  }\n"
+                +"class YourView extends showv.View {\n"
+                +"    constructor() {\n"
+                +"        super();\n"
+                +"    }\n"
                 +"}"
             );
         }

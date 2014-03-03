@@ -1,9 +1,28 @@
 /**
  * main css for showv sample
  */
+html {
+    /*
+    background-size: cover;
+    background-attachment:             fixed;
+    background-repeat:             no-repeat;
+    background-position:         left bottom;
+    background-image: url('../../showv.jpg');
+    */
+}
+body {
+}
 #wrapper {
-    width: 80%;
-    margin: 0 auto;
+    width:       80%;
+    min-width: 680px;
+    margin:   0 auto;
+    padding:    20px;
+    /*
+    background-color: rgba(255,255,255,0.9);
+    */
+}
+h1 {
+    margin:   30px 0;
 }
 h1>span {
     font-style: italic;

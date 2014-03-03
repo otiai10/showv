@@ -27,7 +27,7 @@ var Sample;
             _super.call(this);
         }
         HeaderView.prototype.render = function () {
-            this.$el.append('<h1>Showv <span>The Simplest View Framework for TypeScript</span></h1>');
+            this.$el.append('<h1>Showv <span>The Simplest View Framework for TypeScript<img src="./showv.jpg"></span></h1>');
             return this;
         };
         return HeaderView;
@@ -55,7 +55,7 @@ var Sample;
         function SourcePart(sourcecode) {
             _super.call(this, {
                 tagName: 'pre',
-                className: 'prettyprint'
+                className: 'sourcecode prettyprint'
             });
             this.sourcecode = sourcecode;
             this.$el.append(this.sourcecode);
@@ -82,7 +82,7 @@ var Sample;
     var UsageView = (function (_super) {
         __extends(UsageView, _super);
         function UsageView() {
-            _super.call(this, "Usage", "/// &lt;reference path=\"your/path/to/showv.d.ts\" /&gt;\n" + "module YourApp {\n" + "  export class YourView extends showv.View {\n" + "      constructor() {\n" + "          super();\n" + "      }\n" + "  }\n" + "}");
+            _super.call(this, "Usage", "/// &lt;reference path=\"your/path/to/showv.d.ts\" /&gt;\n" + "class YourView extends showv.View {\n" + "    constructor() {\n" + "        super();\n" + "    }\n" + "}");
         }
         UsageView.prototype.render = function () {
             return _super.prototype.render.call(this);
