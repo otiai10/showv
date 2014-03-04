@@ -16,10 +16,10 @@ module showv {
     }
     export class View {
 
-        tagName:   string = 'div';
-        className: string = '';
-        id:        string = '';
-        delegate: boolean = true;
+        tagName:   string;
+        className: string;
+        id:        string;
+        delegate: boolean;
         attr:      Object;
 
         $el:       JQuery;

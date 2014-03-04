@@ -3,10 +3,6 @@ var showv;
     var View = (function () {
         function View(options) {
             if (typeof options === "undefined") { options = {}; }
-            this.tagName = 'div';
-            this.className = '';
-            this.id = '';
-            this.delegate = true;
             this.ensureOptions(options);
             this.ensureElemens();
             this.delegateEvents();
