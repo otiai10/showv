@@ -35,9 +35,12 @@ module Spec {
                 var mockView: ShowvMockView;
                 beforeEach(() => {
                     var options = {
-                        tagName:   'li',
+                        tagName:   'a',
                         id:        'showv-test-000',
-                        className: 'tweet'
+                        className: 'tweet',
+                        attr: {
+                            href: 'http://otiai10.github.io/showv/'
+                        }
                     };
                     mockView = new ShowvMockView(options);
                 });
@@ -45,13 +48,16 @@ module Spec {
                     mockView.$el.should.be.instanceof(jQuery);
                 });
                 it('tag name should be given tag name', () => {
-                    mockView.$el[0].tagName.should.equal('LI');
+                    mockView.$el[0].tagName.should.equal('A');
                 });
                 it('should have given `id`', () => {
                     mockView.$el[0].id.should.equal('showv-test-000');
                 });
                 it('should have given `class`', () => {
                     mockView.$el[0].className.should.equal('tweet');
+                });
+                it('should have given attrs', () => {
+                    mockView.$el[0].getAttribute('href').should.equal('http://otiai10.github.io/showv/');
                 });
             });
             describe('options with $el', () => {
