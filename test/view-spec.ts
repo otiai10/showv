@@ -105,19 +105,37 @@ module Spec {
             });
         });
 
+        describe('when `events` returns Object having event-key without selector', () => {
+            var mockView: ShowvMockView;
+            beforeEach(() => {
+                mockView = new ShowvMockView({
+                    tagName: 'a'
+                });
+            });
+            it('should have event delegated on it\'s DOM root', () => {
+                mockView.flagX.should.be.false;
+                mockView.$el.click();
+                mockView.flagX.should.be.true;
+                mockView.$el.click();
+                mockView.flagX.should.be.false;
+            });
+        });
     });
 
     // This is just a mock!
     class ShowvMockView extends showv.View {
+        flagX: boolean;
         flagA: boolean;
         flagB: boolean;
         constructor(options: showv.IViewCreateOptions = {}) {
             super(options);
+            this.flagX = false;
             this.flagA = false;
             this.flagB = false;
         }
         events(): Object {
             return {
+                'click':             'methodX',
                 'click a#trigger-A': 'methodA',
                 'click a#trigger-B': 'methodB'
             }
@@ -129,6 +147,9 @@ module Spec {
         methodB() {
             this.flagA = false;
             this.flagB = true;
+        }
+        methodX() {
+            this.flagX = ! this.flagX;
         }
     }
 }
