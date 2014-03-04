@@ -17,13 +17,17 @@ var showv;
             this.id = options.id || '';
             this.delegate = (options.delegate == null) ? true : options.delegate;
             this.$el = options.$el || null;
+            this.attr = options.attr || {};
             return this;
         };
         View.prototype.ensureElemens = function () {
-            this.$el = this.$el || $('<' + this.tagName + '>').attr({
-                id: this.id,
-                class: this.className
-            });
+            this.$el = this.$el || $('<' + this.tagName + '>');
+            var _attrs = this.attr;
+            if (this.id)
+                _attrs['id'] = this.id;
+            if (this.className)
+                _attrs['class'] = this.className;
+            this.$el.attr(_attrs);
             return this;
         };
 

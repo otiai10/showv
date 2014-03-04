@@ -6,6 +6,7 @@ declare module showv {
         id?: string;
         delegate?: boolean;
         $el?: JQuery;
+        attr?: Object;
     }
     interface IEventSelectorPair {
         rawKey: string;
@@ -17,6 +18,7 @@ declare module showv {
         public className: string;
         public id: string;
         public delegate: boolean;
+        public attr: Object;
         public $el: JQuery;
         constructor(options?: IViewCreateOptions);
         private ensureOptions(options);

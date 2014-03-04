@@ -7,6 +7,7 @@ module showv {
         id?:        string;
         delegate?:  boolean;
         $el?:       JQuery;
+        attr?:      Object;
     }
     export interface IEventSelectorPair {
         rawKey:   string;
@@ -19,6 +20,7 @@ module showv {
         className: string = '';
         id:        string = '';
         delegate: boolean = true;
+        attr:      Object;
 
         $el:       JQuery;
 
@@ -34,13 +36,15 @@ module showv {
             this.id        = options.id || '';
             this.delegate  = (options.delegate == null) ? true : options.delegate;
             this.$el       = options.$el || null;
+            this.attr      = options.attr || {};
             return this;
         }
         private ensureElemens(): View {
-            this.$el = this.$el || $('<' + this.tagName + '>').attr({
-                id:    this.id,
-                class: this.className
-            });
+            this.$el = this.$el || $('<' + this.tagName + '>');
+            var _attrs = this.attr;
+            if (this.id) _attrs['id'] = this.id;
+            if (this.className) _attrs['class'] = this.className;
+            this.$el.attr(_attrs);
             return this;
         }
 
