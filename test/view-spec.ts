@@ -44,13 +44,13 @@ module Spec {
                 it('should have $el', () => {
                     mockView.$el.should.be.instanceof(jQuery);
                 });
-                it('tag name should be "div"', () => {
+                it('tag name should be given tag name', () => {
                     mockView.$el[0].tagName.should.equal('LI');
                 });
-                it('should not have `id`', () => {
+                it('should have given `id`', () => {
                     mockView.$el[0].id.should.equal('showv-test-000');
                 });
-                it('should not have `class`', () => {
+                it('should have given `class`', () => {
                     mockView.$el[0].className.should.equal('tweet');
                 });
             });
@@ -66,10 +66,10 @@ module Spec {
                 it('should have $el', () => {
                     mockView.$el.should.be.instanceof(jQuery);
                 });
-                it('tag name should be "div"', () => {
+                it('tag name should be given $el\'s tag name', () => {
                     mockView.$el[0].tagName.should.equal('BLOCKQUOTE');
                 });
-                it('should not have `id`', () => {
+                it('should be given $el\'s `id`', () => {
                     mockView.$el[0].id.should.equal('test-bq');
                 });
             });
