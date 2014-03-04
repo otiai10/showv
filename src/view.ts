@@ -55,11 +55,9 @@ module showv {
             var _events = this.events();
             $.map(_events, (eventFunctionName, eventNameAndSelector) => {
                 var pair = this.splitEventAndSelector(eventNameAndSelector);
-                var fn = (function(_this){
-                    return function(){
-                        _this[_events[pair.rawKey]].apply(_this);
-                    }
-                })(this);
+                var fn = () => {
+                    this[_events[pair.rawKey]].apply(this);
+                };
                 this.$el.on.call(this.$el, pair.evName, pair.selector, fn);
             });
             return this;
