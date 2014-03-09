@@ -1,4 +1,4 @@
-/// <reference path="../definitions/jquery.d.ts" />
+/// <reference path="../definitions/jquery/jquery.d.ts" />
 declare module showv {
     interface IViewCreateOptions {
         tagName?: string;
