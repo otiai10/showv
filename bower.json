@@ -2,8 +2,7 @@
     "name": "showv",
     "version": "0.0.1",
     "devDependencies": {
-        "jquery": "1.10",
-        "underscore": "1.5.2"
+        "jquery": "1.10"
     },
     "ignore": [
         "Gruntfile.coffee",

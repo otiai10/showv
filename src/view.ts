@@ -1,4 +1,3 @@
-/// <reference path="../definitions/underscore.d.ts" />
 /// <reference path="../definitions/jquery.d.ts" />
 
 module showv {
@@ -7,48 +6,71 @@ module showv {
         className?: string;
         id?:        string;
         delegate?:  boolean;
+        $el?:       JQuery;
+        attr?:      Object;
     }
     export interface IEventSelectorPair {
-        eventName: string;
-        selector?: string;
+        rawKey:   string;
+        evName:   string;
+        selector: string;
     }
     export class View {
 
-        tagName:   string = 'div';
-        className: string = '';
-        id:        string = '';
-        delegate: boolean = true;
+        tagName:   string;
+        className: string;
+        id:        string;
+        delegate: boolean;
+        attr:      Object;
 
-        events:    Object = {};
+        $el:       JQuery;
 
         constructor(options: IViewCreateOptions = {}) {
             this.ensureOptions(options);
+            this.ensureElemens();
             this.delegateEvents();
-            console.log(this);
         }
 
-        private ensureOptions(options: IViewCreateOptions) {
+        private ensureOptions(options: IViewCreateOptions): View {
             this.tagName   = options.tagName || 'div';
             this.className = options.className || '';
             this.id        = options.id || '';
             this.delegate  = (options.delegate == null) ? true : options.delegate;
+            this.$el       = options.$el || null;
+            this.attr      = options.attr || {};
+            return this;
+        }
+        private ensureElemens(): View {
+            this.$el = this.$el || $('<' + this.tagName + '>');
+            var _attrs = this.attr;
+            if (this.id) _attrs['id'] = this.id;
+            if (this.className) _attrs['class'] = this.className;
+            this.$el.attr(_attrs);
+            return this;
         }
 
-        delegateEvents(events?: Object): View {
-            this.events = events || {};
-            _.map({}, (eventFunction, eventNameAndSelector) => {
-                console.log(this);
-            });
-            $.map(this.events, (eventFunction, eventNameAndSelector) => {
-                console.log(this);
+        // should be override
+        events(): Object { return {}; }
+
+        delegateEvents(): View {
+            var _events = this.events();
+            $.map(_events, (eventFunctionName, eventNameAndSelector) => {
+                var pair = this.splitEventAndSelector(eventNameAndSelector);
+                var fn = () => {
+                    this[_events[pair.rawKey]].apply(this);
+                };
+                this.$el.on.call(this.$el, pair.evName, pair.selector, fn);
             });
             return this;
         }
-        /*
+        // TODO: Exception handling
         private splitEventAndSelector(eventNameAndSelector: string): IEventSelectorPair {
-
+            var splits = eventNameAndSelector.split(' ');
+            return {
+                rawKey: eventNameAndSelector,
+                evName: splits[0],
+                selector: splits[1]
+            };
         }
-        */
 
         render(): View {
             return this;
