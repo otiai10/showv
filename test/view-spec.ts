@@ -90,7 +90,7 @@ module Spec {
                     $('<a></a>').attr({'id':'trigger-B'})
                 );
             });
-            it('should delegate evetns', () => {
+            it('should delegate events', () => {
                 // initially
                 mockView.flagA.should.be.false;
                 mockView.flagB.should.be.false;
