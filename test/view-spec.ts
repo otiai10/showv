@@ -103,6 +103,12 @@ module Spec {
                 mockView.flagA.should.be.false;
                 mockView.flagB.should.be.true;
             });
+
+            it('event method takes Event Object', () => {
+                mockView.$el.click();
+                mockView.methodResponse.should.not.be.null;
+                mockView.methodResponse.should.instanceof(jQuery.Event);
+            });
         });
 
         describe('when `events` returns Object having event-key without selector', () => {
@@ -127,6 +133,9 @@ module Spec {
         flagX: boolean;
         flagA: boolean;
         flagB: boolean;
+
+        methodResponse: any = "hoge";
+
         constructor(options: showv.IViewCreateOptions = {}) {
             super(options);
             this.flagX = false;
@@ -148,8 +157,9 @@ module Spec {
             this.flagA = false;
             this.flagB = true;
         }
-        methodX() {
+        methodX(ev) {
             this.flagX = ! this.flagX;
+            this.methodResponse = ev;
         }
     }
 }
