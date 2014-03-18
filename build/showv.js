@@ -35,9 +35,9 @@ var showv;
             var _this = this;
             var _events = this.events();
             $.map(_events, function (eventFunctionName, eventNameAndSelector) {
-                var pair = _this.splitEventAndSelector(eventNameAndSelector);
-                var fn = function () {
-                    _this[_events[pair.rawKey]].apply(_this);
+                var pair = _this.splitEventAndSelector(String(eventNameAndSelector));
+                var fn = function (ev) {
+                    _this[_events[pair.rawKey]].call(_this, ev);
                 };
                 _this.$el.on.call(_this.$el, pair.evName, pair.selector, fn);
             });

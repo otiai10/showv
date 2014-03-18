@@ -54,9 +54,9 @@ module showv {
         delegateEvents(): View {
             var _events = this.events();
             $.map(_events, (eventFunctionName, eventNameAndSelector) => {
-                var pair = this.splitEventAndSelector(eventNameAndSelector);
-                var fn = () => {
-                    this[_events[pair.rawKey]].apply(this);
+                var pair = this.splitEventAndSelector(String(eventNameAndSelector));
+                var fn = (ev: JQueryEventObject) => {
+                    this[_events[pair.rawKey]].call(this, ev);
                 };
                 this.$el.on.call(this.$el, pair.evName, pair.selector, fn);
             });
