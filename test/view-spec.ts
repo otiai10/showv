@@ -90,7 +90,7 @@ module Spec {
                     $('<a></a>').attr({'id':'trigger-B'})
                 );
             });
-            it('should delegate evetns', () => {
+            it('should delegate events', () => {
                 // initially
                 mockView.flagA.should.be.false;
                 mockView.flagB.should.be.false;
@@ -102,6 +102,12 @@ module Spec {
                 mockView.$el.find('a#trigger-B').click();
                 mockView.flagA.should.be.false;
                 mockView.flagB.should.be.true;
+            });
+
+            it('event method takes Event Object', () => {
+                mockView.$el.click();
+                mockView.methodResponse.should.not.be.null;
+                mockView.methodResponse.should.instanceof(jQuery.Event);
             });
         });
 
@@ -127,6 +133,9 @@ module Spec {
         flagX: boolean;
         flagA: boolean;
         flagB: boolean;
+
+        methodResponse: any = "hoge";
+
         constructor(options: showv.IViewCreateOptions = {}) {
             super(options);
             this.flagX = false;
@@ -148,8 +157,9 @@ module Spec {
             this.flagA = false;
             this.flagB = true;
         }
-        methodX() {
+        methodX(ev) {
             this.flagX = ! this.flagX;
+            this.methodResponse = ev;
         }
     }
 }
