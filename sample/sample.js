@@ -36,6 +36,59 @@ var Sample;
 })(Sample || (Sample = {}));
 var Sample;
 (function (Sample) {
+    var FeatureListView = (function (_super) {
+        __extends(FeatureListView, _super);
+        function FeatureListView(feature) {
+            _super.call(this, {
+                tagName: 'li'
+            });
+            this.feature = feature;
+        }
+        FeatureListView.prototype.render = function () {
+            this.$el.append("hge");
+            return this;
+        };
+        return FeatureListView;
+    })(showv.View);
+    Sample.FeatureListView = FeatureListView;
+})(Sample || (Sample = {}));
+var Sample;
+(function (Sample) {
+    var FeaturesView = (function (_super) {
+        __extends(FeaturesView, _super);
+        function FeaturesView() {
+            _super.call(this);
+            this.featureList = [
+                { title: "minimum" },
+                { title: "extensible" }
+            ];
+            this.featureListView = Sample.FeatureListView;
+        }
+        FeaturesView.prototype.render = function () {
+            var features = makeupFeatureCollection(this.featureList);
+            this.$el.append('<a class="linky" id="Features" href="#Features"><h2>Features</h2></a>', new this.featureListView(this.featureList[0]).render().$el, new this.featureListView(this.featureList[1]).render().$el);
+            return this;
+        };
+        return FeaturesView;
+    })(showv.View);
+    Sample.FeaturesView = FeaturesView;
+
+    var Feature = (function () {
+        function Feature(featureObject) {
+            this.title = featureObject['title'];
+        }
+        return Feature;
+    })();
+    Sample.Feature = Feature;
+    function makeupFeatureCollection(featureList) {
+        return $.map(featureList, function (featureObject) {
+            return new Feature(featureObject);
+        });
+    }
+    Sample.makeupFeatureCollection = makeupFeatureCollection;
+})(Sample || (Sample = {}));
+var Sample;
+(function (Sample) {
     var SourcecodeView = (function (_super) {
         __extends(SourcecodeView, _super);
         function SourcecodeView(title, source) {
@@ -102,9 +155,10 @@ var Sample;
         function MainView() {
             _super.call(this);
             this.usage = new Sample.UsageView();
+            this.features = new Sample.FeaturesView();
         }
         MainView.prototype.render = function () {
-            this.$el.append(this.usage.render().$el);
+            this.$el.append(this.features.render().$el, this.usage.render().$el);
             return this;
         };
         return MainView;
