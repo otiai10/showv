@@ -1,6 +1,9 @@
 {
     "framework" : "mocha+chai",
-    "before_tests" : "grunt test",
+    "before_tests" : [
+        "grunt build",
+        "grunt test"
+    ],
     "src_files" : [
         "src/**/*.ts",
         "test/**/*.ts"

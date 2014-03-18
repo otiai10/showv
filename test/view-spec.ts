@@ -1,7 +1,7 @@
 /// <reference path="../src/view.ts" />
-/// <reference path="../definitions/mocha.d.ts" />
-/// <reference path="../definitions/chai.d.ts" />
-/// <reference path="../definitions/jquery.d.ts" />
+/// <reference path="../definitions/mocha/mocha.d.ts" />
+/// <reference path="../definitions/chai/chai.d.ts" />
+/// <reference path="../definitions/jquery/jquery.d.ts" />
 
 module Spec {
 
