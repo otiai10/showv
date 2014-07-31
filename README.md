@@ -1,4 +1,4 @@
-# showv
+# showv [![Build Status](https://travis-ci.org/otiai10/showv.svg?branch=master)](https://travis-ci.org/otiai10/showv)
 
 No more than a simple view class by TypeScript.
 
